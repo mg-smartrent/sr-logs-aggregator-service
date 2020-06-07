@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.mg.platform</groupId>
+        <artifactId>sr-parent</artifactId>
+        <version>1.27</version>
+    </parent>
+
+    <artifactId>logs-aggregator-service</artifactId>
+    <version>latest</version>
+    <packaging>jar</packaging>
+
+    <scm>
+        <url>https://github.com/mg-smartrent/sr-logs-aggregator-service</url>
+        <connection>scm:git:https://github.com/mg-smartrent/sr-logs-aggregator-service.git</connection>
+        <developerConnection>scm:git:https://github.com/mg-smartrent/sr-logs-aggregator-service.git
+        </developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <dependencies/>
+
+    <build>
+        <plugins>
+            <!--Docker {-->
+            <!--Copy docker files-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <configuration>
+                            <target>
+                                <copy file="build/libs/zipkin-server-2.20.0-exec.jar" toDir="target/classes/libs"/>
+                                <copy file="target/${project.artifactId}-${project.version}.jar"
+                                      tofile="target/${project.artifactId}.jar"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <configuration>
+                    <tag>${project.version}</tag>
+                </configuration>
+            </plugin>
+            <!--Docker }-->
+        </plugins>
+    </build>
+
+</project>
