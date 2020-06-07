@@ -51,4 +51,4 @@ jobs:
 
       - name: Build & Release Docker
         if: github.ref == 'refs/heads/master'
-        run: mvn -f pom.xml dockerfile:build dockerfile:push -Ddockerfile.skip=false -Ddockerfile.repository=${{ env.MVN_DOCKER_FILE_REPO }} -Ddockerfile.username=${{ secrets.DOCKER_USERNAME }} -Ddockerfile.password=${{ secrets.DOCKER_PASSWORD }}
+        run: mvn -B -f pom.xml dockerfile:build dockerfile:push -Ddockerfile.skip=false -Ddockerfile.repository=${{ env.MVN_DOCKER_FILE_REPO }} -Ddockerfile.username=${{ secrets.DOCKER_USERNAME }} -Ddockerfile.password=${{ secrets.DOCKER_PASSWORD }}
