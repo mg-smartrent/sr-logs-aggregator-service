@@ -1,8 +1,8 @@
-name: Maven Package
+name: MicroService release
 env:
   MVN_SERVER_ID: "github"
   MVN_PACKAGE_REPO_URL: "https://maven.pkg.github.com/mg-smartrent/sr-artifactory"
-
+  MVN_DOCKER_FILE_REPO: "docker.io/maimas/logs-aggregator-service"
 on:
   push:
     branches:
